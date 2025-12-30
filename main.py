@@ -213,8 +213,6 @@ class MainWindow(QMainWindow):
         self.startFishingTimer = time.time()
         self.logsWindow.logs.append([time.localtime(), log])
         time.sleep(0.2)
-        keyboard.press_and_release(rodKey)
-        keyboard.press_and_release(rodKey)
         time.sleep(0.2)
         pyautogui.click(button = "left")
 
