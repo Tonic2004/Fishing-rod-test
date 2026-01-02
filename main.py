@@ -70,7 +70,6 @@ class MainWindow(QMainWindow):
     checkMealTimer: int = 0
     startCheckPotionTimer: float = 0
     checkPotionTimer: int = 0
-    shouldStopFishing: bool = False
     fishCount: int = 0
 
     def __init__(self, title: str):
@@ -103,10 +102,7 @@ class MainWindow(QMainWindow):
         btn_logs.setToolTip("History window")
         self.__countLabel = Label(self, 79, 2, 135, 26, "", f"Caught: {self.fishCount}")
 
-        self.ShouldStopFishingTimer = QTimer(self)
-        self.ShouldStopFishingTimer.setInterval(10)
-        self.ShouldStopFishingTimer.timeout.connect(self.checkShouldStopFishing)
-        self.ShouldStopFishingTimer.start()
+
 
     def openSettings(self) -> None:
         if self.settingsWindow.isVisible():
@@ -122,7 +118,7 @@ class MainWindow(QMainWindow):
 
     def startFishing(self) -> None:
         self.isFishing = not (self.isFishing)
-        if self.isFishing and not self.shouldStopFishing:
+        if self.isFishing
             self.btn_start.setObjectName("btn_red")
             self.btn_start.setText("STOP")
             self.btn_start.setToolTip("Stop fishing")
@@ -133,19 +129,7 @@ class MainWindow(QMainWindow):
             self.logsWindow.logs.append([time.localtime(), "start"])
             self.setStyleSheet(CSS)
         else:
-            self.shouldStopFishing = True
 
-    def checkShouldStopFishing(self) -> None:
-        if self.shouldStopFishing:
-            self.btn_start.setObjectName("btn_standart")
-            self.btn_start.setText("START")
-            self.btn_start.setToolTip("Start fishing")
-            self.isFishing = False
-            self.tryCatchFish = False
-            self.logsWindow.logs.append([time.localtime(), "stop"])
-            self.setStyleSheet(CSS)
-            self.shouldStopFishing = False
-        self.ShouldStopFishingTimer.start()
 
     def closeEvent(self, event) -> None:
         self.settingsWindow.close()
@@ -179,9 +163,6 @@ class MainWindow(QMainWindow):
                             self.endTry("timeError")
                         else: pyautogui.click(button = "left")
 
-                elif self.timeForWait >= self.maxTimeForWait:
-                    if locateImage(IMG_DISCONNECTED, 0.8): self.shouldStopFishing = True
-                    else: self.endTry("timeError")
 
 
     def endTry(self, log: str) -> None:
