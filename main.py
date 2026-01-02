@@ -185,25 +185,6 @@ class MainWindow(QMainWindow):
                     if locateImage(IMG_DISCONNECTED, 0.8): self.shouldStopFishing = True
                     else: self.endTry("timeError")
 
-                elif (self.checkMealTimer >= self.settingsWindow.mealTimer) and (self.settingsWindow.useMeal):
-                    keyboard.press_and_release(f"{self.settingsWindow.mealKey}")
-                    pyautogui.click(button = "left")
-                    time.sleep(0.75)
-                    pyautogui.click(button = "left")
-                    self.logsWindow.logs.append([time.localtime(), "consumeMeal"])
-                    self.startFishingTimer = time.time()
-                    self.startCheckMealTimer = time.time()
-                elif (self.checkPotionTimer >= self.settingsWindow.potionTimer) and (self.settingsWindow.usePotion):
-                    keyboard.press_and_release(f"{self.settingsWindow.potionKey}")
-                    if self.settingsWindow.potionKey != "e":
-                        pyautogui.click(button = "left")
-                        time.sleep(0.75)
-                        pyautogui.click(button = "left")
-                    self.logsWindow.logs.append([time.localtime(), "consumePotion"])
-                    self.startFishingTimer = time.time()
-                    self.startCheckPotionTimer = time.time()
-
-                time.sleep(0.25)
 
     def endTry(self, log: str) -> None:
         self.tryCatchFish = False
