@@ -189,7 +189,6 @@ class MainWindow(QMainWindow):
                     keyboard.press_and_release(f"{self.settingsWindow.mealKey}")
                     pyautogui.click(button = "left")
                     time.sleep(0.75)
-                    keyboard.press_and_release(f"{self.settingsWindow.rodKey}")
                     pyautogui.click(button = "left")
                     self.logsWindow.logs.append([time.localtime(), "consumeMeal"])
                     self.startFishingTimer = time.time()
@@ -199,7 +198,6 @@ class MainWindow(QMainWindow):
                     if self.settingsWindow.potionKey != "e":
                         pyautogui.click(button = "left")
                         time.sleep(0.75)
-                        keyboard.press_and_release(f"{self.settingsWindow.rodKey}")
                         pyautogui.click(button = "left")
                     self.logsWindow.logs.append([time.localtime(), "consumePotion"])
                     self.startFishingTimer = time.time()
