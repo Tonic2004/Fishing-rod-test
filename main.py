@@ -208,7 +208,6 @@ class MainWindow(QMainWindow):
                 time.sleep(0.25)
 
     def endTry(self, log: str) -> None:
-        rodKey = f"{self.settingsWindow.rodKey}"
         self.tryCatchFish = False
         self.startFishingTimer = time.time()
         self.logsWindow.logs.append([time.localtime(), log])
