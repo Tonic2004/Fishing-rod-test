@@ -64,7 +64,7 @@ class MainWindow(QMainWindow):
     isFishing: bool = False
     tryCatchFish: bool = False
     startThisTry: float = 0
-    maxTimeForWait: int = 70
+    maxTimeForWait: int = 1
     startFishingTimer: float = 0
     startCheckMealTimer: float = 0
     checkMealTimer: int = 0
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
         self.__countLabel = Label(self, 79, 2, 135, 26, "", f"Caught: {self.fishCount}")
 
         self.ShouldStopFishingTimer = QTimer(self)
-        self.ShouldStopFishingTimer.setInterval(500)
+        self.ShouldStopFishingTimer.setInterval(10)
         self.ShouldStopFishingTimer.timeout.connect(self.checkShouldStopFishing)
         self.ShouldStopFishingTimer.start()
 
@@ -156,8 +156,6 @@ class MainWindow(QMainWindow):
         while self.isVisible():
             if self.isFishing:
                 self.timeForWait = time.time() - self.startFishingTimer
-                self.checkMealTimer = time.time() - self.startCheckMealTimer
-                self.checkPotionTimer = time.time() - self.startCheckPotionTimer
                 if locateImage(IMG_START, 0.7):
                     self.tryCatchFish = True
                     self.startThisTry = time.time()
